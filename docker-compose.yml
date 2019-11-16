@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  db:
+    image: postgres:9.4
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_DB=nutec_bff
+      - POSTGRES_USER=nutec_bff
+      - POSTGRES_PASSWORD=nutec_bff
+      - MAX_CONNECTIONS=300
