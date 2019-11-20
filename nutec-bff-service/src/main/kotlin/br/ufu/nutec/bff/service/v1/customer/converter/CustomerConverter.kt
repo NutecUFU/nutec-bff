@@ -5,8 +5,8 @@ import br.ufu.nutec.bff.api.v1.customer.response.CustomerResponse
 import br.ufu.nutec.bff.repository.entity.Customer
 
 fun Customer.toResponse(): CustomerResponse = CustomerResponse(
-    id = id,
-    username = username
+    id = id!!,
+    username = username!!
 )
 
 fun List<Customer>.toResponse(): List<CustomerResponse> = this.map { it.toResponse() }

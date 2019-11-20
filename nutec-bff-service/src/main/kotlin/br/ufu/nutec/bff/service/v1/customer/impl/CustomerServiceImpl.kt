@@ -9,6 +9,7 @@ import br.ufu.nutec.bff.repository.repository.CustomerRepository
 import br.ufu.nutec.bff.service.v1.customer.CustomerService
 import br.ufu.nutec.bff.service.v1.customer.converter.toEntity
 import br.ufu.nutec.bff.service.v1.customer.converter.toResponse
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.math.BigInteger
 
@@ -16,6 +17,10 @@ import java.math.BigInteger
 class CustomerServiceImpl(
     private val customerRepository: CustomerRepository
 ): CustomerService {
+    override fun getByUserName(name: String): Customer? {
+        return customerRepository.findByUsername(name)
+    }
+
     override fun delete(id: BigInteger) {
         existCustomer(id)
         customerRepository.deleteById(id)
@@ -36,10 +41,9 @@ class CustomerServiceImpl(
     override fun list(): List<CustomerResponse> = customerRepository.findAll().toResponse()
 
     override fun getOne(id: BigInteger): CustomerResponse {
-        val user = customerRepository.findById(id)
-        if(!user.isPresent) throw NotFoundException("There is no customer with id $id")
-
-        return user.get().toResponse()
+        return customerRepository.findByIdOrNull(id)?.toResponse() ?: throw BadRequestException(
+            "There is no customer with id $id"
+        )
     }
 
     override fun create(customer: CustomerRequest): CustomerResponse {

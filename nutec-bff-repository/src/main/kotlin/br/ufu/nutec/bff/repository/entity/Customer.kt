@@ -3,10 +3,7 @@ package br.ufu.nutec.bff.repository.entity
 import org.hibernate.annotations.GenericGenerator
 import org.hibernate.annotations.Parameter
 import java.math.BigInteger
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.NotNull
 
 @Entity
@@ -29,5 +26,13 @@ data class Customer (
     var username: String? = null,
 
     @NotNull
-    var password: String? = null
+    var password: String? = null,
+
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Role::class)
+    @JoinTable(
+        name = "customer_roles",
+        joinColumns = [JoinColumn(name = "customer_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
+    )
+    var roles: List<Role>? = null
 )

@@ -2,6 +2,7 @@ package br.ufu.nutec.bff.service.v1.customer
 
 import br.ufu.nutec.bff.api.v1.customer.request.CustomerRequest
 import br.ufu.nutec.bff.api.v1.customer.response.CustomerResponse
+import br.ufu.nutec.bff.repository.entity.Customer
 import java.math.BigInteger
 
 interface CustomerService {
@@ -10,4 +11,5 @@ interface CustomerService {
     fun edit(id: BigInteger, customer:CustomerRequest): CustomerResponse
     fun list(): List<CustomerResponse>
     fun getOne(id: BigInteger): CustomerResponse
+    fun getByUserName(name: String): Customer?
 }
