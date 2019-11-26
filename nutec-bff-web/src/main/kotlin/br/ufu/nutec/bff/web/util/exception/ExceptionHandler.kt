@@ -2,6 +2,7 @@ package br.ufu.nutec.bff.web.util.exception
 
 import br.ufu.nutec.bff.api.exception.BadRequestException
 import br.ufu.nutec.bff.api.exception.NotFoundException
+import br.ufu.nutec.bff.api.exception.UnauthorizedException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -23,4 +24,9 @@ open class ExceptionHandler {
     fun exceptionHandler(e: NotFoundException): Map<String, String> =
         mapOf("Error" to e.message.toString())
 
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UnauthorizedException::class)
+    fun unauthorizedHandler(e: UnauthorizedException): Map<String, String> =
+        mapOf("Error" to e.message.toString())
 }

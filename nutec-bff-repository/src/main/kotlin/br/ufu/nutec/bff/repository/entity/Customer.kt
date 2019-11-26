@@ -28,7 +28,7 @@ data class Customer (
     @NotNull
     var password: String? = null,
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Role::class)
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role::class)
     @JoinTable(
         name = "customer_roles",
         joinColumns = [JoinColumn(name = "customer_id", referencedColumnName = "id")],

@@ -1,5 +1,6 @@
 package br.ufu.nutec.bff.api.v1.authenticate
 
+import br.ufu.nutec.bff.api.v1.authenticate.response.JwtToken
 import br.ufu.nutec.bff.api.v1.customer.request.CustomerRequest
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -12,8 +13,8 @@ interface AuthenticateApi {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     fun login(
-        @Valid @RequestBody customerRequest: CustomerRequest
-    )
+        @RequestBody customerRequest: CustomerRequest
+    ): JwtToken
 
 
 }

@@ -1,6 +1,7 @@
 package br.ufu.nutec.bff.web.util.jwt
 
 import br.ufu.nutec.bff.repository.entity.Customer
+import br.ufu.nutec.bff.repository.entity.dto.JwtCustomer
 import org.junit.Test
 
 class JwtUtilTest{
@@ -9,10 +10,10 @@ class JwtUtilTest{
 
     @Test
     fun generateToken() {
-        val customer = Customer(
+        val customer = JwtCustomer(
             id = 1.toBigInteger(),
-            password = "123456",
-            username = "matheussn"
+            email = "123456",
+            name = "matheussn"
         )
         val token = jwtUtil.generateToken(customer)
 

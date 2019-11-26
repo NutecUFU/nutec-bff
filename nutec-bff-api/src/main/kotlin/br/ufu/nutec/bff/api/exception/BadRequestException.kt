@@ -9,3 +9,7 @@ class BadRequestException(
 class NotFoundException(
     msg: String
 ): RuntimeException(msg)
+
+class UnauthorizedException(
+    msg: String
+): RuntimeException(msg)
