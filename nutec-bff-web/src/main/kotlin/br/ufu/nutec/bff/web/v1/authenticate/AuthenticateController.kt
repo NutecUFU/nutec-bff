@@ -24,7 +24,6 @@ class AuthenticateController(
         @RequestBody customerRequest: CustomerRequest
     ): JwtToken {
         val jwtCustomer = authenticated(customerRequest)
-
         val token = jwtTokenUtil.generateToken(jwtCustomer)
 
         return JwtToken(token)
@@ -38,6 +37,6 @@ class AuthenticateController(
         if (customer.password != customerRequest.password)
             throw UnauthorizedException("Invalid Password")
 
-        return customerInfoService.getByCustomer(customer).toJwt(customer.username)
+        return customerInfoService.getByCustomer(customer).toJwt(customer.roles)
     }
 }

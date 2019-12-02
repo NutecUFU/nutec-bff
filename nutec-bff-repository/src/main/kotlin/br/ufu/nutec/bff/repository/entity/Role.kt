@@ -24,7 +24,7 @@ data class Role (
     @NotNull
     var name: String? = null,
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Customer::class)
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Privilege::class)
     @JoinTable(
         name = "roles_privileges",
         joinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")],

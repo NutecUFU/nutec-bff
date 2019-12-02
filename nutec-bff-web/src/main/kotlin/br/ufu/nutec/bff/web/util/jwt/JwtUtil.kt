@@ -2,9 +2,11 @@ package br.ufu.nutec.bff.web.util.jwt
 
 import br.ufu.nutec.bff.api.exception.UnauthorizedException
 import br.ufu.nutec.bff.repository.entity.dto.JwtCustomer
+import br.ufu.nutec.bff.service.v1.customerinfo.converter.toJwt
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.json.YamlJsonParser
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import java.time.Instant
@@ -36,6 +38,7 @@ class JwtUtil {
         val claims = HashMap<String, Any>()
         claims["name"] = jwtCustomer.name
         claims["email"] = jwtCustomer.email
+        claims["roles"] = jwtCustomer.roles.toJwt()
         return createToken(claims, jwtCustomer.id.toString())
     }
 

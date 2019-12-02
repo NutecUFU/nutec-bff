@@ -22,8 +22,8 @@ data class Privilege (
     var id: BigInteger? = null,
 
     @NotNull
-    var name: String? = null,
+    var name: String? = null//,
 
-    @ManyToMany(mappedBy = "privileges")
-    var roles: List<Role>? = null
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "privileges")
+//    var roles: List<Role>? = null
 )
